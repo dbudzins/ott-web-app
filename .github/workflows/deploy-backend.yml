@@ -24,5 +24,4 @@ jobs:
           service: 'ott-backend'
           #image: 'gcr.io/cloudrun/hello'
           region: 'europe-west4'
-          source: 'api'
-
+          source: './api'
