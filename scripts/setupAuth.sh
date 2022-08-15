@@ -30,3 +30,5 @@ gcloud iam service-accounts add-iam-policy-binding "github-action-runner@${PROJE
   --role="roles/iam.workloadIdentityUser" \
   --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}"
 
+# TODO: Add all permissions on the github action user
+# TODO: Make the service public by default
