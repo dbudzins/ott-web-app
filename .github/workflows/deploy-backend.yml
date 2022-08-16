@@ -24,6 +24,5 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
           service: 'ott-backend'
-          #image: 'gcr.io/cloudrun/hello'
-          region: 'europe-west4'
+          region: '${{ secrets.GCLOUD_REGION }}'
           source: './api'
