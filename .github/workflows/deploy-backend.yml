@@ -18,8 +18,8 @@ jobs:
       - id: 'auth'
         uses: 'google-github-actions/auth@v0'
         with:
-          workload_identity_provider: 'projects/641228848625/locations/global/workloadIdentityPools/github-action-pool/providers/github-token-provider'
-          service_account: 'github-action-runner@refined-asset-359508.iam.gserviceaccount.com'
+          workload_identity_provider: '${{ secrets.GCLOUD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCLOUD_SERVICE_ACCOUNT }}'
       - id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
