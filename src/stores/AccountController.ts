@@ -12,7 +12,7 @@ import * as persist from '#src/utils/persist';
 import { useAccountStore } from '#src/stores/AccountStore';
 import { restoreWatchHistory, serializeWatchHistory } from '#src/stores/WatchHistoryController';
 import { restoreFavorites, serializeFavorites } from '#src/stores/FavoritesController';
-import { getMediaByWatchlist } from '#src/services/api.service';
+import { getMediaByWatchlist } from '#src/services/media.service';
 import { queryClient } from '#src/providers/QueryProvider';
 
 const PERSIST_KEY_ACCOUNT = 'auth';

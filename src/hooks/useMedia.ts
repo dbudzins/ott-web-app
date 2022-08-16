@@ -1,5 +1,5 @@
 import useContentProtection from '#src/hooks/useContentProtection';
-import { getMediaById } from '#src/services/api.service';
+import { getMediaById } from '#src/services/media.service';
 
 export default function useMedia(mediaId: string, enabled: boolean = true) {
   const callback = (token?: string, drmPolicyId?: string) => getMediaById(mediaId, token, drmPolicyId);

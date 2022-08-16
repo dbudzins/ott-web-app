@@ -1,8 +1,8 @@
-import { getMediaToken } from '../services/entitlement.service';
+import { getMediaToken } from '../services/signing.service';
 import { useAccountStore } from '../stores/AccountStore';
 import { useConfigStore } from '../stores/ConfigStore';
 
-import { getMediaById } from '#src/services/api.service';
+import { getMediaById } from '#src/services/media.service';
 import useEventCallback from '#src/hooks/useEventCallback';
 import type { PlaylistItem } from '#types/playlist';
 import { addQueryParams } from '#src/utils/formatting';

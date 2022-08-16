@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { getPublicToken } from '#src/services/entitlement.service';
+import { getPublicToken } from '#src/services/signing.service';
 import { useConfigStore } from '#src/stores/ConfigStore';
 import type { GetPlaylistParams } from '#types/playlist';
 import type { GetMediaParams } from '#types/media';

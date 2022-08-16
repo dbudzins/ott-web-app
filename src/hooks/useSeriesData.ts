@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import usePlaylist from '#src/hooks/usePlaylist';
 import useSeries, { SeriesStaleTime } from '#src/hooks/useSeries';
-import { getMediaByIds } from '#src/services/api.service';
+import { getMediaByIds } from '#src/services/media.service';
 import type { Season, Series } from '#types/series';
 import { mapEpisodes, playlistToSeries, sortSeries } from '#src/utils/series';
 

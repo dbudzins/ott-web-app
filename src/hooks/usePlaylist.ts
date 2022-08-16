@@ -1,7 +1,7 @@
 import useContentProtection from '#src/hooks/useContentProtection';
 import { generatePlaylistPlaceholder } from '#src/utils/collection';
 import type { GetPlaylistParams } from '#types/playlist';
-import { getPlaylistById } from '#src/services/api.service';
+import { getPlaylistById } from '#src/services/media.service';
 import { queryClient } from '#src/providers/QueryProvider';
 
 const placeholderData = generatePlaylistPlaceholder(30);

@@ -13,3 +13,4 @@ firebase-debug.log
 .idea
 .DS_Store
 .vscode/
+/stats.html

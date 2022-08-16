@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { getSeries } from '#src/services/api.service';
+import { getSeries } from '#src/services/media.service';
 import type { SeriesData } from '#types/series';
 import type { ApiError } from '#src/utils/api';
 
