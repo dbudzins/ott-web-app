@@ -46,19 +46,27 @@ export default ({ mode }: { mode: 'production' | 'development' | 'test' }) => {
     build: {
       outDir: './build',
       cssCodeSplit: false,
+      minify: true,
       rollupOptions: {
         output: {
           manualChunks: (id) => {
             if (id.includes('/src/services/')) {
-              return 'services/' + id.split('/').reverse()[0].slice(0, -3);
+              return 'services';
             }
 
             if (id.includes('/node_modules/react-virtualized/dist/')) {
               return 'react-virtualized';
             }
 
-            if (id.includes('/node_modules/react-dom/')) {
-              return 'react-dom';
+            // I originally just wanted to separate react-dom as its own bundle,
+            // but you get an error at runtime without these dependencies
+            if (
+              id.includes('/node_modules/react-dom/') ||
+              id.includes('/node_modules/scheduler/') ||
+              id.includes('/node_modules/object-assign/') ||
+              id.includes('/node_modules/react/')
+            ) {
+              return 'react';
             }
 
             if (id.includes('/node_modules/')) {
