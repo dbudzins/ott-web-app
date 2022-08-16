@@ -1,3 +1,56 @@
+# [2.6.0](https://github.com/jwplayer/ott-web-app/compare/v2.5.0...v2.6.0) (2022-08-16)
+
+
+### Bug Fixes
+
+* **e2e:** dial workers back to 2 to fix CI, fix featured shelf test ([1ac4ca0](https://github.com/jwplayer/ott-web-app/commit/1ac4ca01bc4ac10361b523bdb39b7895242727bf))
+* **e2e:** fix remaining tests and bugs ([8663a2e](https://github.com/jwplayer/ott-web-app/commit/8663a2e35c68a3afc5ff594f64b62531bf1fbe99))
+* **epg:** demo mode in different timezones ([af205ae](https://github.com/jwplayer/ott-web-app/commit/af205aea75d83cad2b922be26612abf602982e3b))
+* **epg:** last hour not visible in timeline ([6de8811](https://github.com/jwplayer/ott-web-app/commit/6de8811aed95a5fc1f860966bbbffeb2cd12ddb6))
+* **epg:** livetag always visible on mobile ([622207d](https://github.com/jwplayer/ott-web-app/commit/622207dba7820dea1f46c93c250dcea827386892))
+* **epg:** mobile epg layout improvements and scroll to top ([d19c8ff](https://github.com/jwplayer/ott-web-app/commit/d19c8ff6a3eddd0e3b01abac1731421c7000d060))
+* **epg:** outline with border-radius not working in Safari ([19ec7fa](https://github.com/jwplayer/ott-web-app/commit/19ec7faf8d4eece84b6dd99528765dc227fcdb50))
+* **epg:** update channel when data changes ([40cfe9f](https://github.com/jwplayer/ott-web-app/commit/40cfe9fe431358d9e2c5e4ba13330d5153386cdf))
+* **project:** fix loading initial state, i18n usage ([3224281](https://github.com/jwplayer/ott-web-app/commit/322428171e8935f22afccb22f3c071df9d90b601))
+* **project:** fix source ([369ee76](https://github.com/jwplayer/ott-web-app/commit/369ee76ad8035a7e5fd86da1814b3305427f6bc5))
+* **project:** fix source param ([2647e47](https://github.com/jwplayer/ott-web-app/commit/2647e479d87016e2658321b080bf862e92f93e95))
+* **project:** fix source param ([a9478d2](https://github.com/jwplayer/ott-web-app/commit/a9478d27b22a28a4b28749006254a489e5bdc786))
+
+
+### Features
+
+* **e2e:** add live channels end to end tests ([bcc3dfa](https://github.com/jwplayer/ott-web-app/commit/bcc3dfa21127f642aec64a3c7ac701b4b3a3c6ff))
+* **epg:** add authentication header when scheduleToken is defined ([4e47144](https://github.com/jwplayer/ott-web-app/commit/4e4714481358e0bb5b0d9774a48bacfb6e76e8ff))
+* **epg:** add channel active state and click action ([969c906](https://github.com/jwplayer/ott-web-app/commit/969c906b7f4ad00b39ba9ae5585bde69dffc1ee8))
+* **epg:** add ended state to epgprogram ([712b157](https://github.com/jwplayer/ott-web-app/commit/712b157edc552e8d0a6ec0d3727d54b1bd8b5e98))
+* **epg:** add epg channel item ([e186c97](https://github.com/jwplayer/ott-web-app/commit/e186c97c03dfab86caca6e3e7e5083389caa21d4))
+* **epg:** add epg loading indicator ([721f162](https://github.com/jwplayer/ott-web-app/commit/721f1627b168e0a860cfa89e80c031eb2731b42a))
+* **epg:** add epg program item ([7467792](https://github.com/jwplayer/ott-web-app/commit/7467792a669cdbe4dc41e1f8d09c7fd0054ff6e2))
+* **epg:** add epg timelin compontent ([c2252be](https://github.com/jwplayer/ott-web-app/commit/c2252be466e09ddba0454348bcb563329e7d6463))
+* **epg:** add EpgService and schedule data fixtures ([d9a4f2d](https://github.com/jwplayer/ott-web-app/commit/d9a4f2da15b1d9731896b114a15977ec60159c77))
+* **epg:** add live channels layout and epg ([bfe4d20](https://github.com/jwplayer/ott-web-app/commit/bfe4d20808c75078526e5dc2423de447ad271468))
+* **epg:** add schedule demo mode ([2ac2eb1](https://github.com/jwplayer/ott-web-app/commit/2ac2eb1445bf2bb1e9cb23895bdd3a89f1e0aede))
+* **epg:** add start from beginning button ([ec8d56e](https://github.com/jwplayer/ott-web-app/commit/ec8d56eec8d07597abd354b5a4d0124491c2756d))
+* **epg:** add timeline controls to epg ([3fac9bd](https://github.com/jwplayer/ott-web-app/commit/3fac9bdee3e56a2616422e4db7783ce7f1298332))
+* **epg:** allow channel selection by clicking on the logo ([11ee74e](https://github.com/jwplayer/ott-web-app/commit/11ee74e83aff77d6a8155f1c0f7b43d71dbf2966))
+* **epg:** allow deeplinking to live channel ([56435e9](https://github.com/jwplayer/ott-web-app/commit/56435e9d4facc6ea2bf3af718b80c539b55d403f))
+* **epg:** fill schedule with static program when empty ([d0f41a0](https://github.com/jwplayer/ott-web-app/commit/d0f41a0a71fe2646187cac89554fe313dc2df0aa))
+* **epg:** implement catchup hours mechanism ([793af01](https://github.com/jwplayer/ott-web-app/commit/793af013773318e4d5f0d56a93e13ab52b06204a))
+* **epg:** improve live channels SEO ([a653555](https://github.com/jwplayer/ott-web-app/commit/a653555a87a4dba8b69074c44bb16f8723502aca))
+* **epg:** refetch live channel schedules every 15 minutes ([46987df](https://github.com/jwplayer/ott-web-app/commit/46987dfde81e6616fec570aa04cd4a7fd07085b2))
+* **epg:** rename watch from beginning button to watch from begin ([457810e](https://github.com/jwplayer/ott-web-app/commit/457810e926c0a859b5cf6517b963803b878ba0d4))
+* **epg:** scroll to now when clicking a channel ([9ce9321](https://github.com/jwplayer/ott-web-app/commit/9ce9321fb43cf108f2de844bc907f912f7fb6632))
+* **epg:** show correct time for locale ([97b234f](https://github.com/jwplayer/ott-web-app/commit/97b234f6e924db5936d1b3a905aad906df385bbd))
+* **epg:** styled epg according to design ([a4e2bb2](https://github.com/jwplayer/ott-web-app/commit/a4e2bb267101dc63068a9f9655ede7d84d71a6fb))
+* **epg:** update program information and remove static program ([6f03f7b](https://github.com/jwplayer/ott-web-app/commit/6f03f7b888d2f5f85df5ace7b398f2b2e4b0918c))
+* **epg:** update start and end date to redraw timeline ([e71b0d9](https://github.com/jwplayer/ott-web-app/commit/e71b0d9a04d96ee773e3045037393a1d91f32b1e))
+* **epg:** use different static program when schedule fails to load ([fdba70d](https://github.com/jwplayer/ott-web-app/commit/fdba70db5b43307ca8a74afa6e5d9801f9728792))
+* **project:** add backend cloud run poc ([724c4ee](https://github.com/jwplayer/ott-web-app/commit/724c4eee6d283ec629a8b91acb57dc07c954537e))
+* **project:** rename some services and adjust bundling BREAKING_CHANGE ([1a1b887](https://github.com/jwplayer/ott-web-app/commit/1a1b887fe138c4ccff378825f406336c5aff122a))
+* **series:** update series to new structure instead of playlist structure ([3bcb1dc](https://github.com/jwplayer/ott-web-app/commit/3bcb1dcbd11dc9dd5d1ee3caeac5949a846618c4))
+
+
+
 # [2.5.0](https://github.com/jwplayer/ott-web-app/compare/v2.4.2...v2.5.0) (2022-08-05)
 
 
