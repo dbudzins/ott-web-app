@@ -50,10 +50,6 @@ export default ({ mode }: { mode: 'production' | 'development' | 'test' }) => {
       rollupOptions: {
         output: {
           manualChunks: (id) => {
-            if (id.includes('/src/services/')) {
-              return 'services';
-            }
-
             if (id.includes('/node_modules/react-virtualized/dist/')) {
               return 'react-virtualized';
             }

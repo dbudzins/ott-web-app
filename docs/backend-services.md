@@ -6,20 +6,12 @@ calls the [JW Player Delivery API](https://developer.jwplayer.com/jwplayer/docs)
 However, for additional functionality, the application can also connect to other backends to provide user
 accounts / authentication, subscription management, and checkout flows. 
 
-## OTT Firebase API
+## OTT Cloud Run API
 
 This API is a lightweight demo backend built to support the minimal backend functions, such as auth and content
-protection that can't be done through the frontend alone. It primarily uses Firebase / Google cloud Cloud Run.
+protection, that can't be done through the frontend alone. For more information, including how to deploy it, see the [easy deployments](docs/easy-deployments.md) document.
 
-1)s [Enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account) on your firebase project (note that there is a free tier for these services, but they still require
-   you to enable billing.)
-2) Install the gcloud cli: https://cloud.google.com/sdk/docs/install
-3) Use [scripts/setupAuth.sh](scripts/setupAuth.sh) to setup the github authentication for your project. Remeber to provide the REPO and PROJECT_ID environment variables. 
-4) Enable the Cloud Run API for your project: https://console.cloud.google.com/apis/library/run.googleapis.com?project=_
-5) Enable the Cloud Run Admin service account setting: https://console.cloud.google.com/cloud-build/settings/service-account (see https://stackoverflow.com/questions/62783869/why-am-i-seeing-this-error-error-gcloud-run-deploy-permission-denied-the-c)
-6) Enable the Artifact Registry API: https://console.cloud.google.com/flows/enableapi?apiid=artifactregistry.googleapis.com&redirect=https://cloud.google.com/artifact-registry/docs/docker/quickstart
-7) Enable the Cloud Build API: https://console.cloud.google.com/apis/api/cloudbuild.googleapis.com/overview
-
+This API is written to be a conainerized Node application, so it should be possible to port it to another cloud or hosting platform without much trouble.
 
 ## Roles and Functions
 
