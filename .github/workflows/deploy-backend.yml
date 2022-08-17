@@ -26,3 +26,4 @@ jobs:
           service: 'ott-backend'
           region: '${{ secrets.GCLOUD_REGION }}'
           source: './api'
+          flags: '--allow-unauthenticated'
