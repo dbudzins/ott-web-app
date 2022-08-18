@@ -1,6 +1,36 @@
 {
+  "include": [
+    "src",
+    "types"
+  ],
   "compilerOptions": {
+    "module": "ES2022",
+    "moduleResolution": "Node",
+    "outDir": "build",
+    "rootDir": "src",
+    "baseUrl": "./",
+    /* paths - import rewriting/resolving */
+    "paths": {
+      "#src/*": [
+        "./src/*"
+      ],
+      "#types/*": [
+        "./types/*"
+      ]
+    },
+    /* Additional Options */
+    "strict": true,
     "esModuleInterop": true,
-    "module": "es6"
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "error",
+    // Ensure unused code is cleaned up
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    // Fallthrough must be documented
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+    ]
   }
 }
