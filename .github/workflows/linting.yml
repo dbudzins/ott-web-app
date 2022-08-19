@@ -19,6 +19,6 @@ jobs:
       - name: yarn install, lint
         run: |
           yarn install
-          yarn lint
+          yarn workspaces run lint
         env:
           CI: true

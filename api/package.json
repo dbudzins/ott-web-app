@@ -7,7 +7,9 @@
     "start": "vite",
     "build": "vite build",
     "clean": "rm -rf build",
-    "start-prod": "node build/app.mjs"
+    "start-prod": "node build/app.mjs",
+    "lint": "echo 'TODO: Lint api code'",
+    "test": "echo 'TODO: Test api code'"
   },
   "author": "Danny Budzinski",
   "license": "Apache-2.0",

@@ -56,9 +56,11 @@ const Button: React.FC<Props> = ({
 
   return to ? (
     <NavLink className={buttonClassName} to={to} activeClassName={styles.active} {...rest} exact>
-      {icon}
-      {span}
-      {children}
+      <>
+        {icon}
+        {span}
+        {children}
+      </>
     </NavLink>
   ) : (
     <button className={buttonClassName} onClick={onClick} type={type} disabled={disabled} aria-disabled={disabled} {...rest}>

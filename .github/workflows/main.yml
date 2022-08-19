@@ -19,6 +19,6 @@ jobs:
       - name: yarn install, build, and test
         run: |
           yarn
-          yarn test
+          yarn workspaces run test
         env:
           CI: true
