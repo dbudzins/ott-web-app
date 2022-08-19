@@ -86,6 +86,13 @@ Steps to run:
 5) Run [scripts/gcloud-setup.sh](scripts/gcloud-setup.sh) to setup everything your project needs for frontend hosting on Firebase
    and/or backend hosting with Cloud Run, including policies to allow deployment from the github actions.
 6) Copy and paste the values from the `GITHUB_SECRET__<SECRET NAME>` files into correspondingly named secrets on the Github repo.
+7) If you need secrets at runtime (such as `APP_JW_API_SECRET`) do the following ([reference](https://cloud.google.com/run/docs/configuring/secrets#access-secret)):
+   1) Get the name of the service account that runs the Cloud Run image from serviceAccountName in the Service Details > Yaml tab on the GCloud console
+   2) Enable the Google Secrets API
+   3) Add your secret
+   4) After the secret is created, select it on the Secrets list page and choose Permissions > Add Principal
+   5) Enter the service account email from above and add the `Secret Manager Secret Accessor` role
+   6) Add any new secrets to the [deploy-backend](.github/workflows/deploy-backend.yml) action yml 
 
 ### Github Pages
 

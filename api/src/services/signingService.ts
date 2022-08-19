@@ -2,7 +2,9 @@ import jwt from 'jsonwebtoken';
 
 const Time = new Date();
 
-const API_SECRET = import.meta.env.APP_JW_API_SECRET;
+// This is a runtime secret, not a vite secret,
+// because it will be passed to the container in the cloud, not replaced at compile time
+const { JW_API_SECRET } = process.env;
 
 /**
  * Generatea a URL with signature.
@@ -11,12 +13,16 @@ const API_SECRET = import.meta.env.APP_JW_API_SECRET;
  * @returns {string} signed URL
  */
 const signUrl = (path: string, host = 'https://cdn.jwplayer.com') => {
+  if (!JW_API_SECRET) {
+    throw 'JW API Secret is missing';
+  }
+
   const token = jwt.sign(
     {
       exp: Math.ceil((Time.getTime() + 3600) / 300) * 300, // Round to even 5 minutes for caching
       resource: path,
     },
-    API_SECRET,
+    JW_API_SECRET,
   );
 
   return `${host}${path}?token=${token}`;

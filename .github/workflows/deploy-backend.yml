@@ -27,3 +27,5 @@ jobs:
           region: '${{ secrets.GCLOUD_REGION }}'
           source: './api'
           flags: '--allow-unauthenticated'
+          secrets: |
+            JW_API_SECRET=JW_API_SECRET

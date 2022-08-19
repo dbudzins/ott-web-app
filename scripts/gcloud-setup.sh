@@ -271,6 +271,8 @@ if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
   --member="serviceAccount:github-action-runner@${PROJECT_ID}.iam.gserviceaccount.com" \
   --role="roles/storage.admin" > /dev/null || exit 1;
 
+# TODO: Create and setup JW_API_SECRET
+
 else
   echo "Skipping Backend setup..."
 fi
