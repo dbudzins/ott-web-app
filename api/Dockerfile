@@ -16,21 +16,28 @@
 
 # Use the official lightweight Node.js 16 image.
 # https://hub.docker.com/_/node
+FROM node:16-slim AS build-image
+
+# Create and change to the app directory.
+WORKDIR /usr/src/build
+
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
+COPY . ./
+
+# Install dependencies.
+RUN yarn install && yarn clean && yarn build
+
 FROM node:16-slim
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
-# Copying this separately prevents re-running npm install on every code change.
-COPY package*.json ./
+COPY --from=build-image /usr/src/build/package.json /usr/src/build/yarn.lock /usr/src/build/build build/
 
-# Install production dependencies.
-RUN yarn install --prod
-
-# Copy local code to the container image.
-COPY . ./
+# Install dependencies and fix the file structure
+RUN mv build/package.json . && mv build/yarn.lock . && yarn install --prod
 
 EXPOSE 3000
 # Run the web service on container startup.

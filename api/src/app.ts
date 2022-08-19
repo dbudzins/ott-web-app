@@ -20,7 +20,7 @@ if (import.meta.env.PROD) {
   const port = process.env.PORT || 3000;
 
   app.listen(port, () => {
-    console.info('Hello world listening on port', port);
+    console.info('Listening on port', port);
   });
 }
 

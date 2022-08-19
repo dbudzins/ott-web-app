@@ -1,2 +1,4 @@
 Dockerfile
 node_modules
+build
+docker-compose.yaml

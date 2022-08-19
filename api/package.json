@@ -7,7 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "clean": "rm -rf build",
-    "start-prod": "yarn clean && yarn build && node build/app.mjs"
+    "start-prod": "node build/app.mjs"
   },
   "author": "Danny Budzinski",
   "license": "Apache-2.0",
