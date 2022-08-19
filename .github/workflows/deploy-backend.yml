@@ -26,6 +26,6 @@ jobs:
           service: 'ott-backend'
           region: '${{ secrets.GCLOUD_REGION }}'
           source: './api'
-          flags: '--allow-unauthenticated'
+          flags: '--allow-unauthenticated --port=3000'
           secrets: |
             JW_API_SECRET=JW_API_SECRET:latest
