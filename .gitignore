@@ -15,3 +15,5 @@ firebase-debug.log
 .vscode/
 /stats.html
 GITHUB_SECRET_*
+
+**/.env.local

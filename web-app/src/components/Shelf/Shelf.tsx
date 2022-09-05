@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { isLocked } from 'ott-common/src/utils/entitlements';
+import type { Playlist, PlaylistItem } from 'ott-common/types/playlist';
+import type { AccessModel } from 'ott-common/types/accessModel';
 
 import styles from './Shelf.module.scss';
 
@@ -8,11 +11,9 @@ import useBreakpoint, { Breakpoint, Breakpoints } from '#src/hooks/useBreakpoint
 import ChevronLeft from '#src/icons/ChevronLeft';
 import ChevronRight from '#src/icons/ChevronRight';
 import { findPlaylistImageForWidth } from '#src/utils/collection';
-import type { AccessModel, ContentType } from '#types/Config';
-import { isLocked } from '#src/utils/entitlements';
+import type { ContentType } from '#types/Config';
 import TileDock from '#src/components/TileDock/TileDock';
 import Card from '#src/components/Card/Card';
-import type { Playlist, PlaylistItem } from '#types/playlist';
 import CardTag from '#src/components/Tag/CardTag';
 
 export const tileBreakpoints: Breakpoints = {

@@ -4,13 +4,14 @@ import shallow from 'zustand/shallow';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { differenceInSeconds, format } from 'date-fns';
+import type { Playlist } from 'ott-common/types/playlist';
+import { addQueryParams, liveChannelsURL } from 'ott-common/src/utils/formatting';
 
 import styles from './PlaylistLiveChannels.module.scss';
 
 import Epg from '#src/components/Epg/Epg';
 import useBlurImageUpdater from '#src/hooks/useBlurImageUpdater';
 import { useConfigStore } from '#src/stores/ConfigStore';
-import type { Playlist } from '#types/playlist';
 import VideoDetails from '#src/components/VideoDetails/VideoDetails';
 import LoadingOverlay from '#src/components/LoadingOverlay/LoadingOverlay';
 import useLiveChannels from '#src/hooks/useLiveChannels';
@@ -18,7 +19,6 @@ import ShareButton from '#src/components/ShareButton/ShareButton';
 import StartWatchingButton from '#src/containers/StartWatchingButton/StartWatchingButton';
 import Cinema from '#src/containers/Cinema/Cinema';
 import useEntitlement from '#src/hooks/useEntitlement';
-import { addQueryParams, liveChannelsURL } from '#src/utils/formatting';
 import Button from '#src/components/Button/Button';
 import Play from '#src/icons/Play';
 import useLiveProgram from '#src/hooks/useLiveProgram';

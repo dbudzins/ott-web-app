@@ -1,18 +1,18 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { formatDate, formatPrice } from 'ott-common/src/utils/formatting';
+import type { AccessModel } from 'ott-common/types/accessModel';
+import type { PaymentDetail, Subscription, Transaction } from 'ott-common/types/subscription';
 
-import { formatDate, formatPrice } from '../../utils/formatting';
 import TextField from '../TextField/TextField';
-import type { Customer } from '../../../types/account';
 import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 import Button from '../Button/Button';
-import { addQueryParam } from '../../utils/history';
 
 import styles from './Payment.module.scss';
 
-import type { PaymentDetail, Subscription, Transaction } from '#types/subscription';
-import type { AccessModel } from '#types/Config';
+import { addQueryParam } from '#src/utils/history';
+import type { Customer } from '#types/account';
 
 const VISIBLE_TRANSACTIONS = 4;
 

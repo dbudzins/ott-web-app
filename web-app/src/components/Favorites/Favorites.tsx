@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import type { AccessModel } from 'ott-common/types/accessModel';
 
 import Button from '../Button/Button';
 import CardGrid from '../CardGrid/CardGrid';
 import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 import ErrorPage from '../ErrorPage/ErrorPage';
-import { Breakpoint, Breakpoints } from '../../hooks/useBreakpoint';
 
 import styles from './Favorites.module.scss';
 
-import type { AccessModel } from '#types/Config';
-import type { PlaylistItem } from '#types/playlist';
+import { Breakpoint, Breakpoints } from '#src/hooks/useBreakpoint';
 import { useConfigStore } from '#src/stores/ConfigStore';
 
 type Props = {

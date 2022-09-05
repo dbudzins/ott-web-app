@@ -1,7 +1,8 @@
 import jwtDecode from 'jwt-decode';
+import * as subscriptionService from 'ott-common/src/services/subscription.service';
+import { getPaymentDetails, getTransactions } from 'ott-common/src/services/subscription.service';
+import { getMediaByWatchlist } from 'ott-common/src/services/mediaDelivery.service';
 
-import * as subscriptionService from '#src/services/subscription.service';
-import { getPaymentDetails, getTransactions } from '#src/services/subscription.service';
 import * as accountService from '#src/services/account.service';
 import { fetchCustomerConsents, fetchPublisherConsents, updateCustomer } from '#src/services/account.service';
 import { useFavoritesStore } from '#src/stores/FavoritesStore';
@@ -12,7 +13,6 @@ import * as persist from '#src/utils/persist';
 import { useAccountStore } from '#src/stores/AccountStore';
 import { restoreWatchHistory, serializeWatchHistory } from '#src/stores/WatchHistoryController';
 import { restoreFavorites, serializeFavorites } from '#src/stores/FavoritesController';
-import { getMediaByWatchlist } from '#src/services/media.service';
 import { queryClient } from '#src/providers/QueryProvider';
 
 const PERSIST_KEY_ACCOUNT = 'auth';

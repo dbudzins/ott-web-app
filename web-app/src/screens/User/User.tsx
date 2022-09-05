@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import shallow from 'zustand/shallow';
+import { cardUrl } from 'ott-common/src/utils/formatting';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import Favorites from '../../components/Favorites/Favorites';
 import PlaylistContainer from '../../containers/PlaylistContainer/PlaylistContainer';
-import { PersonalShelf } from '../../enum/PersonalShelf';
 import useBlurImageUpdater from '../../hooks/useBlurImageUpdater';
-import { cardUrl } from '../../utils/formatting';
 import useBreakpoint, { Breakpoint } from '../../hooks/useBreakpoint';
 import Button from '../../components/Button/Button';
 import AccountComponent from '../../components/Account/Account';
@@ -16,14 +16,14 @@ import AccountCircle from '../../icons/AccountCircle';
 import Favorite from '../../icons/Favorite';
 import BalanceWallet from '../../icons/BalanceWallet';
 import Exit from '../../icons/Exit';
-import { useAccountStore } from '../../stores/AccountStore';
 import LoadingOverlay from '../../components/LoadingOverlay/LoadingOverlay';
 import ConfirmationDialog from '../../components/ConfirmationDialog/ConfirmationDialog';
-import { useConfigStore } from '../../stores/ConfigStore';
 
 import styles from './User.module.scss';
 
-import type { PlaylistItem } from '#types/playlist';
+import { useConfigStore } from '#src/stores/ConfigStore';
+import { useAccountStore } from '#src/stores/AccountStore';
+import { PersonalShelf } from '#src/enum/PersonalShelf';
 import { logout } from '#src/stores/AccountController';
 import { clear as clearFavorites } from '#src/stores/FavoritesController';
 

@@ -1,8 +1,9 @@
 import { array, object, string } from 'yup';
 import { addDays, differenceInDays, endOfDay, isValid, startOfDay, subDays } from 'date-fns';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import { getDataOrThrow } from 'ott-common/src/utils/api';
+import axios, { AxiosRequestHeaders } from 'axios';
 
-import type { PlaylistItem } from '#types/playlist';
-import { getDataOrThrow } from '#src/utils/api';
 import { logDev } from '#src/utils/common';
 
 const AUTHENTICATION_HEADER = 'API-KEY';
@@ -72,8 +73,9 @@ class EpgService {
    */
   generateDemoPrograms(programs: EpgProgram[]) {
     const today = new Date();
-    const startDate = new Date(programs[0]?.startTime);
-
+    const startDate = stringToDate(programs[0]?.startTime);
+    console.info(programs[0]?.startTime);
+    console.info(startDate);
     // this makes sure that the start of the day is correct. `startOfDay(startDate)` doesn't work since it can yield
     // a different date depending on the timezone.
     // for example, given a startTime of `2022-08-03T23:00:00Z` will parse to `2022-08-04T01:00:00+0200` in
@@ -83,8 +85,8 @@ class EpgService {
 
     return programs.map((program) => ({
       ...program,
-      startTime: addDays(new Date(program.startTime), daysDelta).toJSON(),
-      endTime: addDays(new Date(program.endTime), daysDelta).toJSON(),
+      startTime: addDays(stringToDate(program.startTime), daysDelta).toJSON(),
+      endTime: addDays(stringToDate(program.endTime), daysDelta).toJSON(),
     }));
   }
 
@@ -125,15 +127,15 @@ class EpgService {
       return undefined;
     }
 
-    const headers = new Headers();
+    const headers: AxiosRequestHeaders = {};
 
     // add authentication token when `scheduleToken` is defined
     if (item.scheduleToken) {
-      headers.set(AUTHENTICATION_HEADER, item.scheduleToken);
+      headers[AUTHENTICATION_HEADER] = item.scheduleToken;
     }
 
     try {
-      const response = await fetch(item.scheduleUrl, {
+      const response = await axios(item.scheduleUrl, {
         headers,
       });
 
@@ -172,6 +174,14 @@ class EpgService {
     return Promise.all(items.map((item) => this.getSchedule(item)));
   }
 }
+
+const stringToDate = (dateString: string) => {
+  if (dateString.substring(-6, 1) === '+' || dateString.substring(-6, 1) === '-' || dateString.endsWith('Z')) {
+    return new Date(dateString);
+  }
+
+  return new Date(dateString + 'Z');
+};
 
 // TODO: currently exported as singleton, the initialisation should be moved to a Service registry when this is added
 export default new EpgService();

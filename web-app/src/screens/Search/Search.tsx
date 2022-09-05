@@ -4,20 +4,20 @@ import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import shallow from 'zustand/shallow';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import { cardUrl } from 'ott-common/src/utils/formatting';
 
 import useBlurImageUpdater from '../../hooks/useBlurImageUpdater';
-import { useUIStore } from '../../stores/UIStore';
 import useSearchQueryUpdater from '../../hooks/useSearchQueryUpdater';
 import ErrorPage from '../../components/ErrorPage/ErrorPage';
-import type { PlaylistItem } from '../../../types/playlist';
 import CardGrid from '../../components/CardGrid/CardGrid';
-import { cardUrl } from '../../utils/formatting';
 import useFirstRender from '../../hooks/useFirstRender';
-import { useAccountStore } from '../../stores/AccountStore';
-import { useConfigStore } from '../../stores/ConfigStore';
 
 import styles from './Search.module.scss';
 
+import { useAccountStore } from '#src/stores/AccountStore';
+import { useConfigStore } from '#src/stores/ConfigStore';
+import { useUIStore } from '#src/stores/UIStore';
 import usePlaylist from '#src/hooks/usePlaylist';
 
 type SearchRouteParams = {
@@ -37,7 +37,7 @@ const Search: React.FC<RouteComponentProps<SearchRouteParams>> = ({
   const searchQuery = useUIStore((state) => state.searchQuery);
   const { updateSearchQuery } = useSearchQueryUpdater();
   const history = useHistory();
-  const { isFetching, error, data: { playlist } = { playlist: [] } } = usePlaylist(features?.searchPlaylist || '', { search: query || '' }, true, !!query);
+  const { isLoading, error, data: { playlist } = { playlist: [] } } = usePlaylist(features?.searchPlaylist || '', { search: query || '' }, true, !!query);
 
   const updateBlurImage = useBlurImageUpdater(playlist);
 
@@ -65,7 +65,7 @@ const Search: React.FC<RouteComponentProps<SearchRouteParams>> = ({
   };
   const onCardHover = (playlistItem: PlaylistItem) => updateBlurImage(playlistItem.image);
 
-  if ((error || !playlist) && !isFetching) {
+  if ((error || !playlist) && !isLoading) {
     return (
       <ErrorPage title={t('error_heading')}>
         <h6>{t('error_subheading')}</h6>

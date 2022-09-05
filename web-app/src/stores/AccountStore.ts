@@ -1,4 +1,5 @@
-import type { PaymentDetail, Subscription, Transaction } from '#types/subscription';
+import type { PaymentDetail, Subscription, Transaction } from 'ott-common/types/subscription';
+
 import type { AuthData, Consent, Customer, CustomerConsent } from '#types/account';
 import { createStore } from '#src/stores/utils';
 

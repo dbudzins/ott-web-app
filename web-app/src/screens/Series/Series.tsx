@@ -4,13 +4,14 @@ import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import shallow from 'zustand/shallow';
+import { episodeURL, formatVideoMetaString } from 'ott-common/src/utils/formatting';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './Series.module.scss';
 
 import useEntitlement from '#src/hooks/useEntitlement';
 import CardGrid from '#src/components/CardGrid/CardGrid';
 import useBlurImageUpdater from '#src/hooks/useBlurImageUpdater';
-import { episodeURL, formatVideoMetaString } from '#src/utils/formatting';
 import Filter from '#src/components/Filter/Filter';
 import VideoDetails from '#src/components/VideoDetails/VideoDetails';
 import useMedia from '#src/hooks/useMedia';
@@ -29,7 +30,6 @@ import ShareButton from '#src/components/ShareButton/ShareButton';
 import FavoriteButton from '#src/containers/FavoriteButton/FavoriteButton';
 import Button from '#src/components/Button/Button';
 import PlayTrailer from '#src/icons/PlayTrailer';
-import type { PlaylistItem } from '#types/playlist';
 import CardTag from '#src/components/Tag/CardTag';
 import { getEpisodes } from '#src/utils/series';
 
@@ -60,7 +60,7 @@ const Series = ({ match, location }: RouteComponentProps<SeriesRouteParams>): JS
   // Media
   const { isLoading: isPlaylistLoading, isError: isSeriesError, series } = useSeriesData(seriesId);
 
-  const { currentEpisode, nextEpisode } = getEpisodes(episodeId, series);
+  const { currentEpisode, nextEpisode }: { currentEpisode: PlaylistItem; nextEpisode: PlaylistItem } = getEpisodes(episodeId, series);
 
   const [seasonFilter, setSeasonFilter] = useState<string>(currentEpisode?.seasonNumber || series?.seasons?.[0]?.season_number?.toString() || '');
   const filters = useMemo(() => series?.seasons?.map((season) => season.season_number.toString()), [series]);

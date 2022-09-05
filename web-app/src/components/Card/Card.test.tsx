@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import Card from './Card';
 
 import DurationTag from '#src/components/Tag/DurationTag';
 import CardTag from '#src/components/Tag/CardTag';
-import type { PlaylistItem } from '#types/playlist';
 import { renderWithi18n } from '#test/testUtils';
 
 test('renders card with video title', async () => {

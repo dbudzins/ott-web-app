@@ -4,12 +4,12 @@ import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import shallow from 'zustand/shallow';
+import { cardUrl, formatVideoMetaString, movieURL, videoUrl } from 'ott-common/src/utils/formatting';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './Movie.module.scss';
 
 import useBlurImageUpdater from '#src/hooks/useBlurImageUpdater';
-import { cardUrl, formatVideoMetaString, movieURL, videoUrl } from '#src/utils/formatting';
-import type { PlaylistItem } from '#types/playlist';
 import VideoDetails from '#src/components/VideoDetails/VideoDetails';
 import ErrorPage from '#src/components/ErrorPage/ErrorPage';
 import CardGrid from '#src/components/CardGrid/CardGrid';

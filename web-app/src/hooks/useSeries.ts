@@ -1,8 +1,7 @@
 import { useQuery } from 'react-query';
-
-import { getSeries } from '#src/services/media.service';
-import type { SeriesData } from '#types/series';
-import type { ApiError } from '#src/utils/api';
+import type { SeriesData } from 'ott-common/types/series';
+import type { ApiError } from 'ott-common/src/utils/api';
+import { getSeries } from 'ott-common/src/services/mediaDelivery.service';
 
 // 8 hours
 export const SeriesStaleTime = 8 * 60 * 60 * 1000;

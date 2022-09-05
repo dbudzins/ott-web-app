@@ -1,9 +1,10 @@
+import type { PlaylistItem } from 'ott-common/types/playlist';
+
 import { useAccountStore } from '#src/stores/AccountStore';
 import * as persist from '#src/utils/persist';
 import { getMediaItems, updatePersonalShelves } from '#src/stores/AccountController';
 import { useConfigStore } from '#src/stores/ConfigStore';
 import { useWatchHistoryStore } from '#src/stores/WatchHistoryStore';
-import type { PlaylistItem } from '#types/playlist';
 import type { SerializedWatchHistoryItem, WatchHistoryItem } from '#types/watchHistory';
 import { MAX_WATCHLIST_ITEMS_COUNT } from '#src/config';
 

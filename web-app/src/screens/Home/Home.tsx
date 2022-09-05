@@ -5,6 +5,8 @@ import List from 'react-virtualized/dist/commonjs/List';
 import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import shallow from 'zustand/shallow';
+import { cardUrl, slugify } from 'ott-common/src/utils/formatting';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './Home.module.scss';
 
@@ -18,8 +20,6 @@ import ShelfComponent, { featuredTileBreakpoints, tileBreakpoints } from '#src/c
 import usePlaylist from '#src/hooks/usePlaylist';
 import useBreakpoint, { Breakpoint } from '#src/hooks/useBreakpoint';
 import scrollbarSize from '#src/utils/dom';
-import { cardUrl, slugify } from '#src/utils/formatting';
-import type { PlaylistItem } from '#types/playlist';
 import type { Content } from '#types/Config';
 import { useWatchHistoryStore } from '#src/stores/WatchHistoryStore';
 

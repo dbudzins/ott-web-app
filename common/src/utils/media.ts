@@ -1,4 +1,4 @@
-import type { PlaylistItem } from '#types/playlist';
+import type { PlaylistItem } from '../../types/playlist';
 
 type RequiredProperties<T, P extends keyof T> = T & Required<Pick<T, P>>;
 

@@ -1,5 +1,5 @@
-import type { Series, Episode, SeasonData, SeriesData } from '#types/series';
-import type { Playlist, PlaylistItem } from '#types/playlist';
+import type { Series, Episode, SeasonData, SeriesData } from 'ott-common/types/series';
+import type { Playlist, PlaylistItem } from 'ott-common/types/playlist';
 
 export const getEpisodes = (episodeId?: string, series?: Series) => {
   const orderedEpisodes = series?.seasons?.flatMap((season) => season.episodes) || [];

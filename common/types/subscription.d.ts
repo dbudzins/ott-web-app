@@ -1,3 +1,5 @@
+import type { CleengAuthRequest } from 'ott-common/types/cleeng';
+
 // Subscription types
 export type Subscription = {
   subscriptionId: number;

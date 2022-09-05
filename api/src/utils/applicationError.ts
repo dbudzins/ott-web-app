@@ -27,3 +27,11 @@ export class ApplicationError extends Error {
 export const badRequestError = (args: ErrorArgs): ApplicationError => {
   return new ApplicationError(args, 400);
 };
+
+export const notAuthorizedError = (args: ErrorArgs): ApplicationError => {
+  return new ApplicationError(args, 403);
+};
+
+export const notFoundError = (args: ErrorArgs): ApplicationError => {
+  return new ApplicationError(args, 404);
+};

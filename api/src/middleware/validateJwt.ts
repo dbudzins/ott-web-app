@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express';
 
 import cleengJwtParser from '#src/services/cleengJwtValidationServices';
 import { addErrorContext, badRequestError } from '#src/utils/applicationError';
-import type { AuthenticatedRequest } from '#src/utils/authenticatedRequest';
+import type { AuthenticatedRequest, UserIdentity } from '#src/utils/authenticatedRequest';
 
 export interface TokenData {
   expirationSeconds: number;

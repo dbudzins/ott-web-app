@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import { useAccountStore } from '#src/stores/AccountStore';
 import { getMediaItems, updatePersonalShelves } from '#src/stores/AccountController';
@@ -6,7 +7,6 @@ import * as persist from '#src/utils/persist';
 import { useFavoritesStore } from '#src/stores/FavoritesStore';
 import { useConfigStore } from '#src/stores/ConfigStore';
 import type { Favorite, SerializedFavorite } from '#types/favorite';
-import type { PlaylistItem } from '#types/playlist';
 import { MAX_WATCHLIST_ITEMS_COUNT } from '#src/config';
 
 const PERSIST_KEY_FAVORITES = `favorites${window.configId ? `-${window.configId}` : ''}`;

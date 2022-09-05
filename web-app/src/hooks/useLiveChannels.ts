@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { useCallback, useEffect, useState } from 'react';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
-import type { PlaylistItem } from '#types/playlist';
 import epgService, { EpgChannel, EpgProgram } from '#src/services/epg.service';
 import { getLiveProgram, programIsLive } from '#src/utils/epg';
 import { LIVE_CHANNELS_REFETCH_INTERVAL } from '#src/config';

@@ -1,10 +1,10 @@
 import { useQueries } from 'react-query';
 import shallow from 'zustand/shallow';
+import type { MediaOffer } from 'ott-common/types/media';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import { isLocked } from 'ott-common/src/utils/entitlements';
 
-import type { MediaOffer } from '#types/media';
 import type { GetEntitlementsResponse } from '#types/checkout';
-import type { PlaylistItem } from '#types/playlist';
-import { isLocked } from '#src/utils/entitlements';
 import { useConfigStore } from '#src/stores/ConfigStore';
 import { useAccountStore } from '#src/stores/AccountStore';
 import { getEntitlements } from '#src/services/checkout.service';

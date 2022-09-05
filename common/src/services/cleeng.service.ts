@@ -1,18 +1,20 @@
+import axios from 'axios';
+
 export const getBaseUrl = (sandbox: boolean) => (sandbox ? 'https://mediastore-sandbox.cleeng.com' : 'https://mediastore.cleeng.com');
 
 export const performRequest = async (sandbox: boolean, path: string = '/', method = 'GET', body?: string, jwt?: string) => {
   try {
-    const resp = await fetch(`${getBaseUrl(sandbox)}${path}`, {
+    const resp = await axios(`${getBaseUrl(sandbox)}${path}`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: jwt ? `Bearer ${jwt}` : '',
       },
       method,
-      body,
+      data: body
     });
 
-    return await resp.json();
+    return resp.data;
   } catch (error: unknown) {
     return {
       errors: Array.of(error as string),

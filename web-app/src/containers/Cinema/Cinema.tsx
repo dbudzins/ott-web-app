@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './Cinema.module.scss';
 
 import { useWatchHistoryListener } from '#src/hooks/useWatchHistoryListener';
-import type { PlaylistItem } from '#types/playlist';
 import { saveItem } from '#src/stores/WatchHistoryController';
 import { usePlaylistItemCallback } from '#src/hooks/usePlaylistItemCallback';
 import { useConfigStore } from '#src/stores/ConfigStore';

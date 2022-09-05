@@ -1,8 +1,18 @@
-import useContentProtection from '#src/hooks/useContentProtection';
-import { getMediaById } from '#src/services/media.service';
+import { useQuery } from 'react-query';
+
+import { useAccountStore } from '#src/stores/AccountStore';
+import { useConfigStore } from '#src/stores/ConfigStore';
+import { getMediaById } from '#src/services/mediaSigning.service';
 
 export default function useMedia(mediaId: string, enabled: boolean = true) {
-  const callback = (token?: string, drmPolicyId?: string) => getMediaById(mediaId, token, drmPolicyId);
+  const jwt = useAccountStore.getState().auth?.jwt;
 
-  return useContentProtection('media', mediaId, callback, {}, enabled);
+  const signingConfig = useConfigStore((store) => store.config.contentSigningService);
+  const host = signingConfig?.host;
+
+  return useQuery([mediaId, jwt], async () => await getMediaById(mediaId, { host, jwt }), {
+    enabled: !!mediaId && enabled,
+    retry: true,
+    keepPreviousData: true,
+  });
 }

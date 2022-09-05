@@ -42,6 +42,7 @@ const parseToken = (token: string): TokenData => {
   const userIdentity: CleengUserIdentity = {
     userId: cleengData.customerId,
     providerId: cleengData.publisherId,
+    jwt: token
   };
 
   return {

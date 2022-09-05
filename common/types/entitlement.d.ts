@@ -3,4 +3,4 @@ type GetTokenResponse = {
   token: string;
 };
 
-type EntitlementType = 'media' | 'playlist' | 'library';
+export type EntitlementType = 'media' | 'playlist' | 'library';

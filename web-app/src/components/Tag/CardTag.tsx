@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
-import type { PlaylistItem } from '#types/playlist';
 import Tag from '#src/components/Tag/Tag';
 import DurationTag from '#src/components/Tag/DurationTag';
 

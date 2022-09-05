@@ -2,16 +2,27 @@
   "name": "ott-web-app-monorepo",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["api", "web-app"],
+  "workspaces": [
+    "api",
+    "web-app",
+    "common"
+  ],
   "scripts": {
     "prepare": "husky install",
-    "commit-msg": "commitlint --edit $1"
+    "commit-msg": "commitlint --edit $1",
+    "start": "workspaces-run --parallel -- yarn start"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "husky": "^6.0.0",
     "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1"
+    "@commitlint/config-conventional": "^12.1.1",
+    "husky": "^6.0.0",
+    "workspaces-run": "^1.0.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "confusing-browser-globals": "^1.0.10"
   }
 }

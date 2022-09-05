@@ -1,14 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import type { PaymentDetail, Subscription, Transaction } from 'ott-common/types/subscription';
 
 import customer from '../../fixtures/customer.json';
 import transactions from '../../fixtures/transactions.json';
 import paymentDetail from '../../fixtures/paymentDetail.json';
 import subscription from '../../fixtures/subscription.json';
-import type { Customer } from '../../../types/account';
-import type { PaymentDetail, Subscription, Transaction } from '../../../types/subscription';
 
 import Payment from './Payment';
+
+import type { Customer } from '#types/account';
 
 describe.skip('<Payment>', () => {
   test('renders and matches snapshot', () => {

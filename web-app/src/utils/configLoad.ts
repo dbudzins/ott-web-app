@@ -1,4 +1,5 @@
 import merge from 'lodash.merge';
+import type { AccessModel } from 'ott-common/types/accessModel';
 
 import { calculateContrastColor } from '../utils/common';
 import { getConfig } from '../utils/configOverride';
@@ -6,7 +7,7 @@ import loadConfig, { validateConfig } from '../services/config.service';
 import { addScript } from '../utils/dom';
 import { useConfigStore } from '../stores/ConfigStore';
 
-import type { AccessModel, Config, Styling } from '#types/Config';
+import type { Config, Styling } from '#types/Config';
 
 const defaultConfig: Config = {
   id: '',

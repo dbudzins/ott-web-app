@@ -1,8 +1,8 @@
-import { episodeURL, movieURL } from './formatting';
-import { secondsToISO8601 } from './datetime';
+import { episodeURL, movieURL } from 'ott-common/src/utils/formatting';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import type { Series } from 'ott-common/types/series';
 
-import type { PlaylistItem } from '#types/playlist';
-import type { Series } from '#types/series';
+import { secondsToISO8601 } from './datetime';
 
 export const generateSeriesMetadata = (series: Series) => {
   const seriesCanonical = `${window.location.origin}${episodeURL(series)}`;

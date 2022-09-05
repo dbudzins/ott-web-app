@@ -1,13 +1,13 @@
 import express from 'express';
 
-import mediaRouter from '#src/routes/media';
+import defaultRouter from '#src/routes/deafultRoutes';
 import validateJwt from '#src/middleware/validateJwt';
 import globalErrorHandler from '#src/middleware/globalErrorHandler';
 
 const app = express();
 
 app.use('/', validateJwt);
-app.use('/media', mediaRouter);
+app.use('/', defaultRouter);
 
 app.get('/', (_req, res) => {
   res.status(404).send('Not Found. :-(');

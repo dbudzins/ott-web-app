@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { formatDate, formatPrice } from 'ott-common/src/utils/formatting';
+import type { Subscription } from 'ott-common/types/subscription';
 
-import type { Subscription } from '../../../types/subscription';
 import Button from '../Button/Button';
-import { formatDate, formatPrice } from '../../utils/formatting';
-import type { Customer } from '../../../types/account';
 import FormFeedback from '../FormFeedback/FormFeedback';
 
 import styles from './RenewSubscriptionForm.module.scss';
+
+import type { Customer } from '#types/account';
 
 type Props = {
   subscription: Subscription;

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+import type { Playlist, PlaylistItem } from 'ott-common/types/playlist';
 
 import { PersonalShelf, PersonalShelves } from '#src/enum/PersonalShelf';
 import usePlaylist from '#src/hooks/usePlaylist';
 import { useWatchHistoryStore } from '#src/stores/WatchHistoryStore';
 import { useFavoritesStore } from '#src/stores/FavoritesStore';
 import { PLAYLIST_LIMIT } from '#src/config';
-import type { Playlist, PlaylistItem } from '#types/playlist';
 import type { ContentType } from '#types/Config';
 
 type ChildrenParams = {

@@ -4,6 +4,7 @@ import type { ParsedQs } from 'qs';
 
 export interface UserIdentity {
   userId: string;
+  jwt: string;
 }
 
 export interface AuthenticatedRequest<

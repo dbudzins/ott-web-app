@@ -1,5 +1,6 @@
+import type { MediaOffer } from 'ott-common/types/media';
+
 import type { Offer, Order, PaymentMethod } from '#types/checkout';
-import type { MediaOffer } from '#types/media';
 import { createStore } from '#src/stores/utils';
 
 type CheckoutStore = {

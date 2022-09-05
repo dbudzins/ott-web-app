@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { renderHook } from '@testing-library/react-hooks';
+import type { Playlist } from 'ott-common/types/playlist';
 
 import epgService, { EpgChannel } from '#src/services/epg.service';
 import useLiveChannels from '#src/hooks/useLiveChannels';
 import { createWrapper } from '#test/testUtils';
-import type { Playlist } from '#types/playlist';
 import livePlaylistFixture from '#src/fixtures/livePlaylist.json';
 import epgChannelsFixture from '#src/fixtures/epgChannels.json';
 import epgChannelsUpdateFixture from '#src/fixtures/epgChannelsUpdate.json';

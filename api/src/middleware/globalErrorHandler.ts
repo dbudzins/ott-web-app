@@ -15,7 +15,7 @@ const globalErrorHandler: ErrorRequestHandler = async (error, _req, res, _next) 
       status: status,
       message: error.message,
       friendlyMessage: error.friendlyMessage,
-      stackTrace: error.stack.split('\n'),
+      stackTrace: error.stack ? error.stack.split('\n') : undefined,
     });
   }
 };

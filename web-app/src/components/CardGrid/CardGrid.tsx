@@ -1,15 +1,15 @@
 import React from 'react';
 import type { GridCellProps } from 'react-virtualized';
+import { isLocked } from 'ott-common/src/utils/entitlements';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import type { AccessModel } from 'ott-common/types/accessModel';
 
 import styles from './CardGrid.module.scss';
 
 import useBreakpoint, { Breakpoint, Breakpoints } from '#src/hooks/useBreakpoint';
 import { chunk, findPlaylistImageForWidth } from '#src/utils/collection';
-import { isLocked } from '#src/utils/entitlements';
 import Card from '#src/components/Card/Card';
 import VirtualizedGrid from '#src/components/VirtualizedGrid/VirtualizedGrid';
-import type { AccessModel } from '#types/Config';
-import type { PlaylistItem } from '#types/playlist';
 import CardTag from '#src/components/Tag/CardTag';
 
 const defaultCols: Breakpoints = {

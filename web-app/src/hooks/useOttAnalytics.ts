@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-import type { PlaylistItem } from '../../types/playlist';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import { useConfigStore } from '#src/stores/ConfigStore';
 

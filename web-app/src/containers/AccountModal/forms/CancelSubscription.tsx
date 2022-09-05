@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
+import { formatDate } from 'ott-common/src/utils/formatting';
 
 import CancelSubscriptionForm from '../../../components/CancelSubscriptionForm/CancelSubscriptionForm';
-import { removeQueryParam } from '../../../utils/history';
 import LoadingOverlay from '../../../components/LoadingOverlay/LoadingOverlay';
-import { useAccountStore } from '../../../stores/AccountStore';
 import SubscriptionCancelled from '../../../components/SubscriptionCancelled/SubscriptionCancelled';
-import { formatDate } from '../../../utils/formatting';
 
+import { removeQueryParam } from '#src/utils/history';
+import { useAccountStore } from '#src/stores/AccountStore';
 import { updateSubscription } from '#src/stores/AccountController';
 
 const CancelSubscription = () => {

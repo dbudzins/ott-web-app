@@ -1,4 +1,4 @@
-import { get, post, patch } from './cleeng.service';
+import { get, post, patch } from 'ott-common/src/services/cleeng.service';
 
 import type {
   CreateOrder,

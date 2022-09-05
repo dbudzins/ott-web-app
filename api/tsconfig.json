@@ -31,6 +31,7 @@
     // Fallthrough must be documented
     "noFallthroughCasesInSwitch": true,
     "types": [
+      "types/express.d.ts"
     ]
   }
 }

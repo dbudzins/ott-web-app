@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './Player.module.scss';
 
 import { addScript } from '#src/utils/dom';
 import { deepCopy } from '#src/utils/collection';
 import type { JWPlayer } from '#types/jwplayer';
-import type { PlaylistItem } from '#types/playlist';
 import useEventCallback from '#src/hooks/useEventCallback';
 import useOttAnalytics from '#src/hooks/useOttAnalytics';
 import { logDev } from '#src/utils/common';

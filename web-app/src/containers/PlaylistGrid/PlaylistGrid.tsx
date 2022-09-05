@@ -2,17 +2,17 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import shallow from 'zustand/shallow';
+import type { Playlist, PlaylistItem } from 'ott-common/types/playlist';
+import { cardUrl } from 'ott-common/src/utils/formatting';
 
 import styles from './PlaylistGrid.module.scss';
 
-import { cardUrl } from '#src/utils/formatting';
 import { filterPlaylist, getFiltersFromConfig } from '#src/utils/collection';
 import CardGrid from '#src/components/CardGrid/CardGrid';
 import Filter from '#src/components/Filter/Filter';
 import useBlurImageUpdater from '#src/hooks/useBlurImageUpdater';
 import { useAccountStore } from '#src/stores/AccountStore';
 import { useConfigStore } from '#src/stores/ConfigStore';
-import type { Playlist, PlaylistItem } from '#types/playlist';
 
 function PlaylistGrid({ playlist: { feedid: id, title, playlist } }: { playlist: Playlist }) {
   const history = useHistory();

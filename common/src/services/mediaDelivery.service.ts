@@ -1,9 +1,35 @@
+import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
 import { addQueryParams } from '../utils/formatting';
 import { getDataOrThrow } from '../utils/api';
+import { filterMediaOffers } from '../utils/entitlements';
+import type { GetPlaylistParams, Playlist, PlaylistItem } from '../../types/playlist';
+import type { GetSeriesParams, SeriesData } from '../../types/series';
 
-import { filterMediaOffers } from '#src/utils/entitlements';
-import type { GetPlaylistParams, Playlist, PlaylistItem } from '#types/playlist';
-import type { SeriesData, GetSeriesParams } from '#types/series';
+const Time = new Date();
+
+type SigningParams = {apiSecret?: string, drmPolicyId?: string};
+
+/**
+ * Generatea a URL with signature.
+ * @param {string} path
+ * @param apiSecret
+ * @returns {string} signed URL
+ */
+const getToken = (path: string, apiSecret: string) => {
+  if (!apiSecret) {
+    throw 'API Secret is missing';
+  }
+
+  return jwt.sign(
+    {
+      exp: Math.ceil((Time.getTime() + 3600) / 300) * 300, // Round to even 5 minutes for caching
+      resource: path,
+    },
+    apiSecret,
+  );
+};
 
 /**
  * Transform incoming media items
@@ -35,16 +61,19 @@ export const transformPlaylist = (playlist: Playlist, relatedMediaId?: string) =
  * Get playlist by id
  * @param {string} id
  * @param params
+ * @param apiSecret
  * @param {string} [drmPolicyId]
  */
-export const getPlaylistById = async (id?: string, params: GetPlaylistParams = {}, drmPolicyId?: string): Promise<Playlist | undefined> => {
+export const getPlaylistById = async (id?: string, params: GetPlaylistParams = {}, {apiSecret, drmPolicyId}: SigningParams = {}) => {
   if (!id) {
     return undefined;
   }
 
-  const pathname = drmPolicyId ? `/v2/playlists/${id}/drm/${drmPolicyId}` : `/v2/playlists/${id}`;
-  const url = addQueryParams(`${import.meta.env.APP_API_BASE_URL}${pathname}`, params);
-  const response = await fetch(url);
+  const path = drmPolicyId ? `/v2/playlists/${id}/drm/${drmPolicyId}` : `/v2/playlists/${id}`;
+  const token = apiSecret ? getToken(path, apiSecret) : null;
+
+  const url = addQueryParams(`${import.meta.env.APP_API_BASE_URL}${path}`, { ...params, token });
+  const response = await axios(url);
   const data = await getDataOrThrow(response);
 
   return transformPlaylist(data, params.related_media_id);
@@ -53,8 +82,8 @@ export const getPlaylistById = async (id?: string, params: GetPlaylistParams = {
 /**
  * Get watchlist by playlistId
  * @param {string} playlistId
+ * @param mediaIds
  * @param {string} [token]
- * @param {string} [drmPolicyId]
  */
 export const getMediaByWatchlist = async (playlistId: string, mediaIds: string[], token?: string): Promise<PlaylistItem[] | undefined> => {
   if (!mediaIds?.length) {
@@ -63,7 +92,7 @@ export const getMediaByWatchlist = async (playlistId: string, mediaIds: string[]
 
   const pathname = `/apps/watchlists/${playlistId}`;
   const url = addQueryParams(`${import.meta.env.APP_API_BASE_URL}${pathname}`, { token, media_ids: mediaIds });
-  const response = await fetch(url);
+  const response = await axios(url);
   const data = (await getDataOrThrow(response)) as Playlist;
 
   if (!data) throw new Error(`The data was not found using the watchlist ${playlistId}`);
@@ -71,39 +100,22 @@ export const getMediaByWatchlist = async (playlistId: string, mediaIds: string[]
   return (data.playlist || []).map(transformMediaItem);
 };
 
-/**
- * Get media by id
- * @param {string} id
- * @param {string} [token]
- * @param {string} [drmPolicyId]
- */
-export const getMediaById = async (id: string, token?: string, drmPolicyId?: string): Promise<PlaylistItem | undefined> => {
-  const pathname = drmPolicyId ? `/v2/media/${id}/drm/${drmPolicyId}` : `/v2/media/${id}`;
-  const url = addQueryParams(`${import.meta.env.APP_API_BASE_URL}${pathname}`, { token });
-  const response = await fetch(url);
+export const getMediaById = async (id: string, {apiSecret, drmPolicyId}: SigningParams = {}) => {
+  if (!id) {
+    return undefined;
+  }
+
+  const path = drmPolicyId ? `/v2/media/${id}/drm/${drmPolicyId}` : `/v2/media/${id}`;
+  const token = apiSecret ? getToken(path, apiSecret) : null;
+
+  const url = addQueryParams(`${import.meta.env.APP_API_BASE_URL}${path}`, { token });
+  const response = await axios(url);
   const data = (await getDataOrThrow(response)) as Playlist;
   const mediaItem = data.playlist[0];
 
   if (!mediaItem) throw new Error('MediaItem not found');
 
   return transformMediaItem(mediaItem);
-};
-
-/**
- * Gets multiple media items by the given ids. Filters out items that don't exist.
- * @param {string[]} ids
- * @param {Object} tokens
- * @param {string} drmPolicyId
- */
-export const getMediaByIds = async (ids: string[], tokens?: Record<string, string>, drmPolicyId?: string): Promise<PlaylistItem[]> => {
-  // @todo this should be updated when it will become possible to request multiple media items in a single request
-  const responses = await Promise.allSettled(ids.map((id) => getMediaById(id, tokens?.[id], drmPolicyId)));
-
-  function notEmpty<Value>(value: Value | null | undefined): value is Value {
-    return value !== null && value !== undefined;
-  }
-
-  return responses.map((result) => (result.status === 'fulfilled' ? result.value : null)).filter(notEmpty);
 };
 
 /**
@@ -118,8 +130,6 @@ export const getSeries = async (id: string, params: GetSeriesParams = {}): Promi
 
   const pathname = `/apps/series/${id}`;
   const url = addQueryParams(`${import.meta.env.APP_API_BASE_URL}${pathname}`, params);
-  const response = await fetch(url);
-  const data = await getDataOrThrow(response);
-
-  return data;
+  const response = await axios(url);
+  return await getDataOrThrow(response);
 };

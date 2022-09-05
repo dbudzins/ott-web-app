@@ -17,9 +17,9 @@ function Playlist({
     params: { id },
   },
 }: RouteComponentProps<PlaylistRouteParams>) {
-  const { isLoading, isPlaceholderData, error, data: playlist } = usePlaylist(id);
+  const { isLoading, error, data: playlist } = usePlaylist(id);
 
-  if (isLoading || isPlaceholderData) {
+  if (isLoading) {
     return <LoadingOverlay transparentBackground />;
   }
 

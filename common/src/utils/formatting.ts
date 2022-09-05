@@ -1,6 +1,7 @@
-import { getSeriesId, getSeriesIdFromEpisode, isEpisode, isLiveChannel, isSeriesPlaceholder } from '#src/utils/media';
-import type { PlaylistItem } from '#types/playlist';
-import type { Series } from '#types/series';
+import type { PlaylistItem } from '../../types/playlist';
+import type { Series } from '../../types/series';
+
+import { getSeriesId, getSeriesIdFromEpisode, isEpisode, isLiveChannel, isSeriesPlaceholder } from './media';
 
 /**
  * @param duration Duration in seconds
@@ -27,7 +28,7 @@ export const formatDuration = (duration: number): string | null => {
 export const addQueryParams = (url: string, queryParams: { [key: string]: string | number | string[] | undefined | null }) => {
   const queryStringIndex = url.indexOf('?');
   const urlWithoutSearch = queryStringIndex > -1 ? url.slice(0, queryStringIndex) : url;
-  const urlSearchParams = new URLSearchParams(queryStringIndex > -1 ? url.slice(queryStringIndex) : undefined);
+  const urlSearchParams = queryStringIndex > -1 ? Object.fromEntries(url.slice(queryStringIndex).split('&').map(kvp => kvp.split('='))) : {};
 
   Object.keys(queryParams).forEach((key) => {
     const value = queryParams[key];
@@ -39,9 +40,9 @@ export const addQueryParams = (url: string, queryParams: { [key: string]: string
 
     const formattedValue = Array.isArray(value) ? value.join(',') : value;
 
-    urlSearchParams.set(key, String(formattedValue));
+    urlSearchParams[key] = String(formattedValue);
   });
-  const queryString = urlSearchParams.toString();
+  const queryString = Object.entries(urlSearchParams).map(keyValue => keyValue.join('=')).join('&');
 
   return `${urlWithoutSearch}${queryString ? `?${queryString}` : ''}`;
 };

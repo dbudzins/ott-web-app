@@ -1,19 +1,21 @@
 import { afterEach, beforeEach, describe, expect } from 'vitest';
-import { mockFetch, mockGet } from 'vi-fetch';
 import { register, unregister } from 'timezone-mock';
+import type { Playlist } from 'ott-common/types/playlist';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 import epgService, { EpgProgram } from '#src/services/epg.service';
 import scheduleFixture from '#src/fixtures/schedule.json';
 import livePlaylistFixture from '#src/fixtures/livePlaylist.json';
-import type { Playlist } from '#types/playlist';
 
 const livePlaylist = livePlaylistFixture as Playlist;
 const scheduleData = scheduleFixture as EpgProgram[];
+let mockAdapter: MockAdapter;
 
 describe('epgService', () => {
   beforeEach(() => {
-    mockFetch.clearAll();
     vi.useFakeTimers();
+    mockAdapter = new MockAdapter(axios);
   });
 
   afterEach(() => {
@@ -21,57 +23,57 @@ describe('epgService', () => {
     unregister();
     vi.restoreAllMocks();
     vi.useRealTimers();
+    mockAdapter.restore();
   });
 
   test('fetchSchedule performs a request', async () => {
-    const mock = mockGet('/epg/channel1.json').willResolve([]);
+    mockAdapter.onGet('/epg/channel1.json').reply(200, []);
+
     const data = await epgService.fetchSchedule(livePlaylist.playlist[0]);
 
-    const request = mock.getRouteCalls()[0];
-    const requestHeaders = request?.[1]?.headers;
+    const requestHeaders = mockAdapter.history['get'][0].headers;
 
     expect(data).toEqual([]);
-    expect(mock).toHaveFetched();
-    expect(requestHeaders).toEqual(new Headers()); // no headers expected
+    expect(mockAdapter.history['get'].length).toEqual(1);
+    expect(requestHeaders).toEqual({ Accept: 'application/json, text/plain, */*' }); // only default header expected
   });
 
   test('fetchSchedule adds authentication token', async () => {
-    const mock = mockGet('/epg/channel1.json').willResolve([]);
+    mockAdapter.onGet('/epg/channel1.json').reply(200, []);
     const item = Object.assign({}, livePlaylist.playlist[0]);
 
     item.scheduleToken = 'AUTH-TOKEN';
     const data = await epgService.fetchSchedule(item);
 
-    const request = mock.getRouteCalls()[0];
-    const requestHeaders = request?.[1]?.headers;
+    const requestHeaders = mockAdapter.history['get'][0].headers;
 
     expect(data).toEqual([]);
-    expect(mock).toHaveFetched();
-    expect(requestHeaders).toEqual(new Headers({ 'API-KEY': 'AUTH-TOKEN' }));
+    expect(mockAdapter.history['get'].length).toEqual(1);
+    expect(requestHeaders).toEqual({ Accept: 'application/json, text/plain, */*', 'API-KEY': 'AUTH-TOKEN' });
   });
 
   test('getSchedule fetches and validates a valid schedule', async () => {
-    const mock = mockGet('/epg/channel1.json').willResolve(scheduleData);
+    mockAdapter.onGet('/epg/channel1.json').reply(200, scheduleData);
     const schedule = await epgService.getSchedule(livePlaylist.playlist[0]);
 
-    expect(mock).toHaveFetched();
+    expect(mockAdapter.history['get'].length).toEqual(1);
     expect(schedule.title).toEqual('Channel 1');
     expect(schedule.programs.length).toEqual(14);
     expect(schedule.catchupHours).toEqual(7);
   });
 
   test('getSchedule enables the demo transformer when scheduleDemo is set', async () => {
-    const mock = mockGet('/epg/channel1.json').willResolve(scheduleData);
+    mockAdapter.onGet('/epg/channel1.json').reply(200, scheduleData);
 
     // mock the date
-    vi.setSystemTime(new Date(2036, 5, 3, 14, 30, 10, 500));
+    vi.setSystemTime('2036-06-03T14:30:10.500Z');
 
     const item = Object.assign({}, livePlaylist.playlist[0]);
     item.scheduleDemo = '1';
 
     const schedule = await epgService.getSchedule(item);
 
-    expect(mock).toHaveFetched();
+    expect(mockAdapter.history['get'].length).toEqual(1);
     expect(schedule.title).toEqual('Channel 1');
     // first program
     expect(schedule.programs[0].startTime).toEqual('2036-06-03T23:50:00.000Z');
@@ -83,10 +85,15 @@ describe('epgService', () => {
   });
 
   test('getSchedules fetches and validates multiple schedules', async () => {
-    const channel1Mock = mockGet('/epg/channel1.json').willResolve(scheduleData);
-    const channel2Mock = mockGet('/epg/channel2.json').willResolve([]);
-    const channel3Mock = mockGet('/epg/does-not-exist.json').willFail('', 404, 'Not found');
-    const channel4Mock = mockGet('/epg/network-error.json').willThrow(new Error('Network error'));
+    const channel1 = '/epg/channel1.json';
+    const channel2 = '/epg/channel2.json';
+    const channel3 = '/epg/does-not-exist.json';
+    const channel4 = '/epg/network-error.json';
+
+    mockAdapter.onGet(channel1).reply(200, scheduleData);
+    mockAdapter.onGet(channel2).reply(200, []);
+    mockAdapter.onGet(channel3).reply(404);
+    mockAdapter.onGet(channel4).networkError();
 
     // getSchedules for multiple playlist items
     const schedules = await epgService.getSchedules(livePlaylist.playlist);
@@ -95,10 +102,11 @@ describe('epgService', () => {
     expect(livePlaylistFixture.playlist.length).toBe(4);
 
     // all channels have fetched
-    expect(channel1Mock).toHaveFetchedTimes(1);
-    expect(channel2Mock).toHaveFetchedTimes(1);
-    expect(channel3Mock).toHaveFetchedTimes(1);
-    expect(channel4Mock).toHaveFetchedTimes(1);
+    expect(mockAdapter.history['get'].length).toEqual(4);
+    expect(mockAdapter.history['get'].filter((req) => req.url === channel1).length).toEqual(1);
+    expect(mockAdapter.history['get'].filter((req) => req.url === channel2).length).toEqual(1);
+    expect(mockAdapter.history['get'].filter((req) => req.url === channel3).length).toEqual(1);
+    expect(mockAdapter.history['get'].filter((req) => req.url === channel4).length).toEqual(1);
 
     // valid schedule with 10 programs
     expect(schedules[0].title).toEqual('Channel 1');
@@ -232,7 +240,7 @@ describe('epgService', () => {
 
   test('parseSchedule should use the correct demo dates in different timezones', async () => {
     // some date in the far future
-    vi.setSystemTime(new Date(2036, 5, 3, 1, 30, 10, 500));
+    vi.setSystemTime('2036-06-03T01:30:10.5Z');
 
     register('Australia/Adelaide');
 

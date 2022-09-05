@@ -1,3 +1,5 @@
+import type { CleengRequest, CleengAuthRequest, CleengEmptyAuthRequest } from 'ott-common/types/cleeng';
+
 export type Offer = {
   offerId: string;
   offerPrice: number;

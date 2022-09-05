@@ -78,5 +78,8 @@
     }
   },
   "player": "ou7L8htR",
-  "siteName": "Blender"
+  "siteName": "Blender",
+  "contentSigningService": {
+    "host": "http://localhost:3000"
+  }
 }

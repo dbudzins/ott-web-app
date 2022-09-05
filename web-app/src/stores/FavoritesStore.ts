@@ -1,8 +1,9 @@
+import type { Playlist, PlaylistItem } from 'ott-common/types/playlist';
+
 import { createStore } from './utils';
 
 import type { Favorite } from '#types/favorite';
 import { PersonalShelf } from '#src/enum/PersonalShelf';
-import type { Playlist, PlaylistItem } from '#types/playlist';
 
 type FavoritesState = {
   favorites: Favorite[];

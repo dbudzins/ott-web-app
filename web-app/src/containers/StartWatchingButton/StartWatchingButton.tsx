@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './StartWatchingButton.module.scss';
 
@@ -10,7 +11,6 @@ import Button from '#src/components/Button/Button';
 import { addQueryParam } from '#src/utils/history';
 import useEntitlement from '#src/hooks/useEntitlement';
 import { useCheckoutStore } from '#src/stores/CheckoutStore';
-import type { PlaylistItem } from '#types/playlist';
 import { useWatchHistoryStore } from '#src/stores/WatchHistoryStore';
 import { useAccountStore } from '#src/stores/AccountStore';
 

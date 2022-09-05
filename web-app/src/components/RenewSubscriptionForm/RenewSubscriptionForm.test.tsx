@@ -1,12 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import type { Subscription } from 'ott-common/types/subscription';
 
 import customer from '../../fixtures/customer.json';
 import subscription from '../../fixtures/subscription.json';
-import type { Subscription } from '../../../types/subscription';
-import type { Customer } from '../../../types/account';
 
 import RenewSubscriptionForm from './RenewSubscriptionForm';
+
+import type { Customer } from '#types/account';
 
 describe('<RenewSubscriptionForm>', () => {
   test('renders and matches snapshot', () => {

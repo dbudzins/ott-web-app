@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { object, string } from 'yup';
 import { useTranslation } from 'react-i18next';
+import { addQueryParams } from 'ott-common/src/utils/formatting';
 
-import { useAccountStore } from '../../../stores/AccountStore';
-import { addQueryParam, removeQueryParam } from '../../../utils/history';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
 import useForm, { UseFormOnSubmitHandler } from '../../../hooks/useForm';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
-import type { ForgotPasswordFormData } from '../../../../types/account';
 import ConfirmationForm from '../../../components/ConfirmationForm/ConfirmationForm';
 import LoadingOverlay from '../../../components/LoadingOverlay/LoadingOverlay';
-import { addQueryParams } from '../../../utils/formatting';
-import { logDev } from '../../../utils/common';
 
+import type { ForgotPasswordFormData } from '#types/account';
+import { addQueryParam, removeQueryParam } from '#src/utils/history';
+import { useAccountStore } from '#src/stores/AccountStore';
+import { logDev } from '#src/utils/common';
 import { logout, resetPassword } from '#src/stores/AccountController';
 
 type Prop = {

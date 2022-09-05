@@ -1,14 +1,13 @@
-import { getMediaToken } from '../services/signing.service';
+import type { PlaylistItem } from 'ott-common/types/playlist';
+import { addQueryParams } from 'ott-common/src/utils/formatting';
+
 import { useAccountStore } from '../stores/AccountStore';
 import { useConfigStore } from '../stores/ConfigStore';
 
-import { getMediaById } from '#src/services/media.service';
 import useEventCallback from '#src/hooks/useEventCallback';
-import type { PlaylistItem } from '#types/playlist';
-import { addQueryParams } from '#src/utils/formatting';
+import { getMediaById } from '#src/services/mediaSigning.service';
 
 export const usePlaylistItemCallback = (startDateTime?: string | null, endDateTime?: string | null) => {
-  const auth = useAccountStore(({ auth }) => auth);
   const signingConfig = useConfigStore((state) => state.config?.contentSigningService);
 
   const applyLiveStreamOffset = (item: PlaylistItem) => {
@@ -31,18 +30,13 @@ export const usePlaylistItemCallback = (startDateTime?: string | null, endDateTi
   };
 
   return useEventCallback(async (item: PlaylistItem) => {
-    const jwt = auth?.jwt;
+    const jwt = useAccountStore(({ auth }) => auth)?.jwt;
     const host = signingConfig?.host;
-    const drmPolicyId = signingConfig?.drmPolicyId;
     const signingEnabled = !!host;
 
     if (!signingEnabled) return applyLiveStreamOffset(item);
 
-    // if signing is enabled, we need to sign the media item first. Assuming that the media item given to the player
-    // isn't signed.
-    const token = await getMediaToken(host, item.mediaid, jwt, {}, drmPolicyId);
-
-    const signedMediaItem = await getMediaById(item.mediaid, token, drmPolicyId);
+    const signedMediaItem = await getMediaById(item.mediaid, { host: signingConfig.host, jwt: jwt });
 
     return signedMediaItem && applyLiveStreamOffset(signedMediaItem);
   });

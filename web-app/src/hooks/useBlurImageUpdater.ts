@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import { useUIStore } from '../stores/UIStore';
-import type { PlaylistItem } from '../../types/playlist';
 
 const useBlurImageUpdater = (data?: PlaylistItem[] | PlaylistItem) => {
   useEffect(() => {

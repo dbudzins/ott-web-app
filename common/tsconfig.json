@@ -1,0 +1,27 @@
+{
+  "include": [
+    "src",
+    "types"
+  ],
+  "compilerOptions": {
+    "lib": ["ES2021"],
+    "module": "ES2022",
+    "moduleResolution": "Node",
+    "outDir": "build",
+    "rootDir": ".",
+    /* Additional Options */
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "error",
+    // Ensure unused code is cleaned up
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    // Fallthrough must be documented
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+    ]
+  }
+}

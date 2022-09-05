@@ -1,3 +1,5 @@
+import type { CleengRequest, CleengAuthRequest, CleengEmptyRequest } from 'ott-common/types/cleeng';
+
 import type { SerializedWatchHistoryItem } from './watchHistory';
 import type { SerializedFavorite } from './favorite';
 

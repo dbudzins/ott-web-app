@@ -1,3 +1,7 @@
+import { post, put, patch, get } from 'ott-common/src/services/cleeng.service';
+
+import { getOverrideIP, IS_DEV_BUILD } from '../utils/common';
+
 import type {
   ChangePassword,
   GetCustomer,
@@ -12,10 +16,7 @@ import type {
   GetLocales,
   GetCaptureStatus,
   UpdateCaptureAnswers,
-} from '../../types/account';
-import { getOverrideIP, IS_DEV_BUILD } from '../utils/common';
-
-import { post, put, patch, get } from './cleeng.service';
+} from '#types/account';
 
 export const login: Login = async (payload, sandbox) => {
   if (IS_DEV_BUILD) {

@@ -1,10 +1,11 @@
+import type { Playlist, PlaylistItem } from 'ott-common/types/playlist';
+
 import { VideoProgressMinMax } from '../config';
 import { PersonalShelf } from '../enum/PersonalShelf';
 
 import { createStore } from './utils';
 
 import type { WatchHistoryItem } from '#types/watchHistory';
-import type { Playlist, PlaylistItem } from '#types/playlist';
 
 type WatchHistoryState = {
   watchHistory: WatchHistoryItem[];

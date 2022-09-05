@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import styles from './TrailerModal.module.scss';
 
-import type { PlaylistItem } from '#types/playlist';
 import Modal from '#src/components/Modal/Modal';
 import Player from '#src/components/Player/Player';
 import ModalCloseButton from '#src/components/ModalCloseButton/ModalCloseButton';

@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import shallow from 'zustand/shallow';
+import { addQueryParams } from 'ott-common/src/utils/formatting';
 
-import { isSVODOffer } from '../../../utils/subscription';
-
+import { isSVODOffer } from '#src/utils/subscription';
 import CheckoutForm from '#src/components/CheckoutForm/CheckoutForm';
 import { addQueryParam, removeQueryParam } from '#src/utils/history';
 import useForm from '#src/hooks/useForm';
@@ -12,7 +12,6 @@ import LoadingOverlay from '#src/components/LoadingOverlay/LoadingOverlay';
 import Adyen from '#src/components/Adyen/Adyen';
 import PayPal from '#src/components/PayPal/PayPal';
 import NoPaymentRequired from '#src/components/NoPaymentRequired/NoPaymentRequired';
-import { addQueryParams } from '#src/utils/formatting';
 import { useConfigStore } from '#src/stores/ConfigStore';
 import { useCheckoutStore } from '#src/stores/CheckoutStore';
 import { adyenPayment, createOrder, getPaymentMethods, paymentWithoutDetails, paypalPayment, updateOrder } from '#src/stores/CheckoutController';

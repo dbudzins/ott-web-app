@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import { formatPrice } from 'ott-common/src/utils/formatting';
 
 import styles from './CheckoutForm.module.scss';
 
@@ -8,7 +9,6 @@ import Button from '#src/components/Button/Button';
 import type { Offer, Order, PaymentMethod } from '#types/checkout';
 import IconButton from '#src/components/IconButton/IconButton';
 import FormFeedback from '#src/components/FormFeedback/FormFeedback';
-import { formatPrice } from '#src/utils/formatting';
 import Close from '#src/icons/Close';
 import DialogBackButton from '#src/components/DialogBackButton/DialogBackButton';
 import PayPal from '#src/icons/PayPal';

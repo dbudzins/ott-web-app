@@ -1,3 +1,5 @@
+import type { AxiosResponse } from 'axios';
+
 export class ApiError extends Error {
   code: number;
   message: string;
@@ -14,11 +16,11 @@ export class ApiError extends Error {
  * Get data
  * @param response
  */
-export const getDataOrThrow = async (response: Response) => {
-  const data = await response.json();
-
-  if (!response.ok) {
-    const message = `Request '${response.url}' failed with ${response.status}`;
+export const getDataOrThrow = async (response: AxiosResponse) => {
+  const data = await response.data;
+console.info(data);
+  if (response.status !== 200) {
+    const message = `Request '${response.request.url}' failed with ${response.status}`;
     const error = new ApiError(data?.message || message, response.status || 500);
 
     throw error;

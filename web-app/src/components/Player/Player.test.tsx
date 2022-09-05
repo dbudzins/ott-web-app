@@ -1,9 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import type { PlaylistItem } from 'ott-common/types/playlist';
 
 import Player from './Player';
-
-import type { PlaylistItem } from '#types/playlist';
 
 describe('<Player>', () => {
   test('renders and matches snapshot', () => {
